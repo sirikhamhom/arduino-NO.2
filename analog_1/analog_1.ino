@@ -1,30 +1,19 @@
 #include <analogWrite.h>
 
-int BT = 17 ;
- int WIFI = 2 ;
- int NTP = 15 ;
- int IOT = 12 ;
 
-void setup() {
- pinMode (BT,OUTPUT);
- pinMode (WIFI,OUTPUT);
- pinMode (NTP,OUTPUT);
- pinMode (IOT,OUTPUT);
- digitalWrite (BT,HIGH);
- digitalWrite (WIFI,HIGH);
- digitalWrite (NTP,HIGH);
- digitalWrite (IOT,HIGH);
+ int IOT = 12 ;
+ int LDR = 36 ;
+int light = 0;
  
+void setup() {
+ pinMode (IOT,OUTPUT);
+ pinMode (LDR,INPUT_PULLUP);
+ Serial.begin(9600);
 }
 void loop() {
  
-for (int x = 255 ; x >= 0 ; x--){
+light=map (analogRead(36),0, 1024, 0,255 );
 
-analogWrite(BT,x);
-delay(3);
-}
-for(int x = 0 ; x <= 255 ; x++){
-    analogWrite(BT , x);
-    delay(3);
-}
+Serial.print(light);
+analogWrite(IOT,light);
 }
